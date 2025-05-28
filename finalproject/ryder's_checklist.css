@@ -1,0 +1,191 @@
+/* Body Styling */
+body{
+    justify-items: center;
+    background-image: url(/imgs/Ry.png);
+}
+
+/* Main Container  Styling */
+.main{
+    width: 100%; 
+    max-width: 1400px; 
+    height: auto;
+    margin:60px;
+    border-radius: 50px;
+    overflow: hidden;
+    opacity: 90%; /* For slight transparency */
+    background-color: #222222;
+}
+
+.main h1{
+    text-align: center;
+    color: white
+}
+
+.Bridge{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    color:white;
+}
+
+
+/* Containers Styling*/
+.containers{
+    display: flex;
+    gap:10px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: space-evenly;
+}
+
+/* Header inside each container (time of day + icon) */
+.container_head{
+    justify-items: center;
+}
+
+/* Morning Container */
+.container1{
+    width:400px;
+    max-width: 450px;
+    height: auto;
+    border:  #F3D250;
+    border-style: solid;
+    border-radius: 20px;
+    justify-items: center;
+    background-color: #F3D250;
+    color:#F1F1F2;
+}
+
+/* Afternoon Container */
+.container2{
+    width:400px;
+    max-width: 450px;
+    height: auto;
+    border: #90CCF4;
+    border-style: solid;
+    border-radius: 20px;
+    justify-items: center;
+    background-color: #90CCF4;
+    color:#F1F1F2;
+}
+
+/* Evening Container */
+.container3{
+    width:400px;
+    max-width: 450px;
+    height: auto;
+    border:#F78888;
+    border-style: solid;
+    border-radius: 20px;
+    justify-items: center;
+    background-color: #F78888;
+    color:#F1F1F2;
+}
+
+
+/* Activity Styling */
+.activity h2 {
+    margin: 0;
+    flex: 1; 
+}
+
+.activity{
+    width: 345px;
+    height: 50px;
+    margin: 5px;
+    margin-bottom: 5px; 
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    background-color: #F1F1F2;
+    color:#5DA2D5;
+}
+
+/* Container Activity Styling */
+.container1 .activity{
+    color:#F3D250;
+}
+
+.container2 .activity{
+    color:#5DA2D5;
+}
+
+.container3 .activity{
+    color: #F78888;
+}
+
+/* Icon Styling */
+.activity_icon{
+    width: 50px;
+    height: 50px;
+    object-fit: contain; /* Keeps aspect ratio */
+}
+
+.time_icon{
+    max-width: 80px;
+}
+
+/* Button Styling */
+button{
+    width: 40px;
+    height: 40px;
+    border: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 5px;
+    background-color: white ;
+}
+
+/* Reset Button Style */
+ .reset{
+    margin-left: 50px;
+    width: auto;
+    border: 2px;
+    border-style: solid;
+    border-radius: 10%;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #222222 ;
+}
+
+.reset:hover{
+     background-color:#FF0000;
+}
+
+/* Morning Buttons */
+.container1 button{
+    border-color: #F3D250;
+}
+.container1 button:hover{
+    background-color:#F3D250 ;
+}
+
+/* Afternoon Buttons */
+.container2 button{
+    border-color: #5DA2D5;;
+}
+.container2 button:hover{
+    background-color:#5DA2D5 ;
+}
+
+/* Evening Buttons */
+.container3 button{
+    border-color: #F78888;;
+}
+.container3 button:hover{
+    background-color:#F78888;
+}
+
+ /* TOGGLED SELECTIONS */
+.selected1{
+    background-color: #F3D250; /* Morning */
+}
+
+.selected2{
+    background-color: #5DA2D5;  /* Afternoon */
+}
+
+.selected3{
+    background-color: #F78888;  /* Evening */
+}
