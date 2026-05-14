@@ -25,7 +25,7 @@ class Day:
     # Method to display objects to user
     def __repr__(self):
         
-        if self.is_completed == "True":
+        if self.is_completed:
             status = "Done" 
         else:
             status = "Pending"
@@ -48,12 +48,33 @@ def main():
 
     # Determines current time of day before printing tasks
     current_timeofday = Day.get_timeofday()
-    print(f"\n{current_timeofday} Schedule\n")
+    print(f"\n-{current_timeofday} Schedule\n-")
 
+
+    updated_tasks = []
     # Prints only tasks for the current time of day
     for task in tasks:
         if task.timeofday == current_timeofday:
-            print(task)
+            response = input(f"Is '{task.activity}' finished?: ")
+
+            # Updates the object's attribute directly
+            if response == 'yes':
+                task.is_completed = True
+            else:
+                task.is_completed = False
+
+            updated_tasks.append(task)
+
+    print('')  
+    print('//////////////////////////////////')    
+            
+    # Shows updated statuses
+    for task in updated_tasks:
+        
+        print(task)
+    
+    print('///////////////////////////////////')  
+
 
 # Boiler plate to run the program
 if __name__ == "__main__":
