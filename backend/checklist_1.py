@@ -2,7 +2,7 @@ import csv  # Imports the csv module to read and write csv files
 from pathlib import Path # Imports Path from pathlib to handle file paths
 from datetime import datetime # Imports datetime so we can get the current date and time
 
-# Main 'Day' Class 
+# Main 'Day' Class to represent and manage daily activities
 class Day:
 
     def __init__(self, timeofday, activity):
@@ -22,21 +22,39 @@ class Day:
         else:
             return "Evening"
 
-    # __repr__ method to dusplay each object
+    # Method to display objects to user
     def __repr__(self):
-        return f"{self.timeofday}:{self.activity}-{self.is_completed}"
+        
+        if self.is_completed == "True":
+            status = "Done" 
+        else:
+            status = "Pending"
 
-tasks = [] # Empty list to store Day objects
-file_name = "activities.csv" # Stores the CSV file name in a variable 
-path =  Path.cwd() / file_name # Creates a full path to the file using the current working directory
-
-with path.open(mode="r") as file: # Opens the CSV file in read mode
-    reader = csv.DictReader(file) # Creates a DictReader object treating each CSV Row as a dictionary
+        return f"{self.activity} : {status}"
+   
+def main():
+    tasks = [] # Empty list to store Day objects
+    file_name = "activities.csv" # Stores the CSV file name in a variable 
+    path =  Path.cwd() / file_name # Creates a full path to the file using the current working directory
     
-    # Loops through each row, creates a Day Object then adds it to the tasks list
-    for row in reader:
-        tasks.append(Day("Morning", row["Morning"]))
-        tasks.append(Day("Afternoon", row["Afternoon"]))
-        tasks.append(Day("Evening", row["Evening"]))
+    with path.open(mode="r") as file: # Opens the CSV file in read mode
+        reader = csv.DictReader(file) # Creates a DictReader object treating each CSV Row as a dictionary
+    
+        # Loops through each row, creates a Day Object then adds it to the tasks list
+        for row in reader:
+            tasks.append(Day("Morning", row["Morning"]))
+            tasks.append(Day("Afternoon", row["Afternoon"]))
+            tasks.append(Day("Evening", row["Evening"]))
 
-print(tasks)
+    # Determines current time of day before printing tasks
+    current_timeofday = Day.get_timeofday()
+    print(f"\n{current_timeofday} Schedule\n")
+
+    # Prints only tasks for the current time of day
+    for task in tasks:
+        if task.timeofday == current_timeofday:
+            print(task)
+
+# Boiler plate to run the program
+if __name__ == "__main__":
+    main()
