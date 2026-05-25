@@ -1,14 +1,15 @@
 import csv  # Imports the csv module to read and write csv files
 from pathlib import Path # Imports Path from pathlib to handle file paths
 from datetime import datetime # Imports datetime so we can get the current date and time
+import json # Imports json module to write data for the frontend
 
 # Main 'Day' Class to represent and manage daily activities
 class Day:
 
     def __init__(self, timeofday, activity):
-        self.timeofday = timeofday
-        self.activity = activity
-        self.is_completed = False
+        self.timeofday = timeofday # Stores time of day
+        self.activity = activity # Stores activity name
+        self.is_completed = False # Tracks if activity is done
     
     # Static method to determine current part of the day
     @staticmethod
@@ -21,6 +22,14 @@ class Day:
             return "Afternoon"
         else:
             return "Evening"
+    
+    # Method to convert Day object to a dictionary for JSON Export
+    def conv_to_dict(self):
+        return{
+            "timeofday": self.timeofday,
+            "activity": self.activity,
+            "is_completed": self.is_completed
+        }
 
     # Method to display objects to user
     def __repr__(self):
@@ -42,16 +51,18 @@ def main():
     
         # Loops through each row, creates a Day Object then adds it to the tasks list
         for row in reader:
-            tasks.append(Day("Morning", row["Morning"]))
-            tasks.append(Day("Afternoon", row["Afternoon"]))
-            tasks.append(Day("Evening", row["Evening"]))
+            tasks.append(Day(timeofday="Morning",activity=row["Morning"]))
+            tasks.append(Day(timeofday="Afternoon", activity=row["Afternoon"]))
+            tasks.append(Day(timeofday="Evening", activity=row["Evening"]))
 
     # Determines current time of day before printing tasks
     current_timeofday = Day.get_timeofday()
     print(f"\n-{current_timeofday} Schedule\n-")
 
 
-    updated_tasks = []
+    updated_tasks = [] # List for tasks matching current time of day
+    filtered_tasks = [] # List to store tasks after user input
+
     # Prints only tasks for the current time of day
     for task in tasks:
         if task.timeofday == current_timeofday:
@@ -69,11 +80,33 @@ def main():
     print('//////////////////////////////////')    
             
     # Shows updated statuses
-    for task in updated_tasks:
-        
+    for task in updated_tasks:  
         print(task)
-    
     print('///////////////////////////////////')  
+
+    # A dictionary to prepare data for JSON Export
+    exp_data = {
+        "current_timeofday": current_timeofday,
+        "generated_at": datetime.now(),
+        "activities":{
+            "Morning": [],
+            "Afternoon": [],
+            "Evening": []
+        }
+    }
+
+    # Adds all activites to export
+    for task in tasks:
+        exp_data["activities"][task.timeofday].append(task.conv_to_dict())
+
+    print('')
+    print('=========================================')
+    print(f"Exported data to JSON")
+    print('__________________________________________')
+
+    # Displays summary in Terminal
+    for item, task in (filtered_tasks):
+        print(f"{task.activity}")
 
 
 # Boiler plate to run the program
