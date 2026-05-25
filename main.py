@@ -99,9 +99,24 @@ def main():
     for task in tasks:
         exp_data["activities"][task.timeofday].append(task.conv_to_dict())
 
+    # Writes JSON File for frontend
+    json_path = Path(__file__).parent/"schedule_data.js"
+
+    completed_list = []
+    for task in tasks:
+        if task.is_completed == True:
+            completed_list.append(task.activity)
+        
+    jsstring = json.dumps(completed_list) # Converts the list into JavaScript text string
+
+    # Writes list of compeleted activities to JSON file
+    with json_path.open(mode="w") as json_file:
+        json_file.write(f"var completedTasks = {jsstring};")
+
+
     print('')
     print('=========================================')
-    print(f"Exported data to JSON")
+    print(f"Exported data to", {json_path})
     print('__________________________________________')
 
     # Displays summary in Terminal
