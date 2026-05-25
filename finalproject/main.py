@@ -6,9 +6,10 @@ import json # Imports json module to write data for the frontend
 # Main 'Day' Class to represent and manage daily activities
 class Day:
 
-    def __init__(self, timeofday, activity):
+    def __init__(self, timeofday, activity, points=1):
         self.timeofday = timeofday # Stores time of day
         self.activity = activity # Stores activity name
+        self.points = points # Stores points earned for completing activity
         self.is_completed = False # Tracks if activity is done
     
     # Static method to determine current part of the day
@@ -28,6 +29,7 @@ class Day:
         return{
             "timeofday": self.timeofday,
             "activity": self.activity,
+            "points": self.points,
             "is_completed": self.is_completed
         }
 
@@ -51,9 +53,9 @@ def main():
     
         # Loops through each row, creates a Day Object then adds it to the tasks list
         for row in reader:
-            tasks.append(Day(timeofday="Morning",activity=row["Morning"]))
-            tasks.append(Day(timeofday="Afternoon", activity=row["Afternoon"]))
-            tasks.append(Day(timeofday="Evening", activity=row["Evening"]))
+            tasks.append(Day(timeofday="Morning",activity=row["Morning"].strip(), points=1))
+            tasks.append(Day(timeofday="Afternoon", activity=row["Afternoon"].strip(), points=1))
+            tasks.append(Day(timeofday="Evening", activity=row["Evening"].strip(), points=1))
 
     # Determines current time of day before printing tasks
     current_timeofday = Day.get_timeofday()

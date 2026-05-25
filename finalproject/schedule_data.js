@@ -1,0 +1,1 @@
+var completedTasks = ["Reading a book", "Lunch", "Clean dishes", "Play Time"];
