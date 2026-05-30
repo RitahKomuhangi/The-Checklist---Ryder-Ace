@@ -2,7 +2,7 @@ import csv  # Imports the csv module to read and write csv files
 from pathlib import Path # Imports Path from pathlib to handle file paths
 from datetime import datetime # Imports datetime so we can get the current date and time
 import json # Imports json module to write data for the frontend
-from tinydb import TinyDB
+from tinydb import TinyDB # Imports tinydb to manage Database operations
 
 # Main 'Day' Class to represent and manage daily activities
 class Day:
@@ -41,7 +41,6 @@ class Day:
             status = "Done" 
         else:
             status = "Pending"
-
         return f"{self.activity} : {status}"
    
 def main():
@@ -63,10 +62,8 @@ def main():
     current_timeofday = Day.get_timeofday()
     print(f"\n-{current_timeofday} Schedule\n-")
 
-
     updated_tasks = [] # List for tasks matching current time of day
     filtered_tasks = [] # List to store tasks after user input
-
 
     # Prints only tasks for the current time of day
     for task in tasks:
@@ -127,7 +124,6 @@ def main():
     # Writes list of compeleted activities to JSON file
     with json_path.open(mode="w") as json_file:
         json_file.write(f"var completedTasks = {jsstring};")
-
 
     print('')
     print('=========================================')
