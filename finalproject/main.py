@@ -93,7 +93,7 @@ def main():
         if task.is_completed:
             total_points += task.points
     
-    print(f"\nPoints earned today: {total_points}")
+    print(f"\nPoints earned: {total_points}")
 
     # Saves today's date and total points to the database
     db.insert({
@@ -127,7 +127,6 @@ def main():
 
     print('')
     print('=========================================')
-    print(f"Exported data to", {json_path})
     print('__________________________________________')
 
     # Displays summary in Terminal
