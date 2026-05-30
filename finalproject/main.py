@@ -2,6 +2,7 @@ import csv  # Imports the csv module to read and write csv files
 from pathlib import Path # Imports Path from pathlib to handle file paths
 from datetime import datetime # Imports datetime so we can get the current date and time
 import json # Imports json module to write data for the frontend
+from tinydb import TinyDB
 
 # Main 'Day' Class to represent and manage daily activities
 class Day:
@@ -44,6 +45,7 @@ class Day:
         return f"{self.activity} : {status}"
    
 def main():
+    db = TinyDB("points_db.json") # Creates the TinyDB database file
     tasks = [] # Empty list to store Day objects
     file_name = "activities.csv" # Stores the CSV file name in a variable 
     path =  Path.cwd() / file_name # Creates a full path to the file using the current working directory
@@ -64,6 +66,7 @@ def main():
 
     updated_tasks = [] # List for tasks matching current time of day
     filtered_tasks = [] # List to store tasks after user input
+
 
     # Prints only tasks for the current time of day
     for task in tasks:
@@ -86,16 +89,26 @@ def main():
         print(task)
     print('///////////////////////////////////')  
 
+    total_points = 0 # Variable to store total points earned
+
+     # Loops through all tasks and adds points for completed activities
+    for task in tasks:
+        if task.is_completed:
+            total_points += task.points
+    
+    print(f"\nPoints earned today: {total_points}")
+
+    # Saves today's date and total points to the database
+    db.insert({
+        "logged_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timeofday": current_timeofday,
+        "points": total_points
+    })
+
     # A dictionary to prepare data for JSON Export
     exp_data = {
-        "current_timeofday": current_timeofday,
-        "generated_at": datetime.now(),
-        "activities":{
-            "Morning": [],
-            "Afternoon": [],
-            "Evening": []
-        }
-    }
+        "current_timeofday": current_timeofday, "generated_at": datetime.now(),
+        "activities":{"Morning": [], "Afternoon": [], "Evening": []}}
 
     # Adds all activites to export
     for task in tasks:
@@ -122,9 +135,8 @@ def main():
     print('__________________________________________')
 
     # Displays summary in Terminal
-    for item, task in (filtered_tasks):
+    for task in (filtered_tasks):
         print(f"{task.activity}")
-
 
 # Boiler plate to run the program
 if __name__ == "__main__":

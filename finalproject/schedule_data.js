@@ -1,1 +1,1 @@
-var completedTasks = ["Reading a book", "Lunch", "Clean dishes", "Play Time"];
+var completedTasks = ["Greeting", "Brushing Teeth", "Taking a Bath", "Dress Up", "Make The Bed", "Breakfast"];
