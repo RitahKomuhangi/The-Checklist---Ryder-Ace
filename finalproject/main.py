@@ -54,10 +54,10 @@ def main():
     
         # Loops through each row, creates a Day Object then adds it to the tasks list
         for row in reader:
-            tasks.append(Day(timeofday="Morning",activity=row["Morning"].strip(), points=1))
+            tasks.append(Day(timeofday="Morning", activity=row["Morning"].strip(), points=1))
             tasks.append(Day(timeofday="Afternoon", activity=row["Afternoon"].strip(), points=1))
-            tasks.append(Day(timeofday="Evening", activity=row["Evening"].strip(), points=1))
-
+            tasks.append(Day(timeofday="Evening", activity=row["Evening"].strip(), points=1)) 
+    
     # Determines current time of day before printing tasks
     current_timeofday = Day.get_timeofday()
     print(f"\n-{current_timeofday} Schedule\n-")
@@ -88,7 +88,7 @@ def main():
 
     total_points = 0 # Variable to store total points earned
 
-     # Loops through all tasks and adds points for completed activities
+    # Loops through all tasks and adds points for completed activities
     for task in tasks:
         if task.is_completed:
             total_points += task.points
