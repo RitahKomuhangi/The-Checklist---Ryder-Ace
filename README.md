@@ -1,6 +1,6 @@
-# Ryder's Checklist 0.2
+# Ryder's Checklist 
 
-Ryder's Checklist 0.2 is a build up on "The Checklist 1.0" which was built to help Ryder Ace stay motivated and develop consisted daily habits through a structured routine.
+The Project is a build up on "Ryder's Checklist" which was built to help Ryder Ace stay motivated and develop consisted daily habits through a structured routine.
 ---
 
 ## About
