@@ -32,7 +32,7 @@ function getTimeOfDay(){
   }
 }
 // Button Groups
-let btns = document.querySelectorAll(".btn"); // Selects all buttons with class .btn
+let btns = document.querySelectorAll(".bttn"); // Selects all buttons with class .btn
 
 btns.forEach(function (button) {
   button.onclick = function () {
@@ -48,7 +48,7 @@ btns.forEach(function (button) {
     };
 });
 
-let btns1 = document.querySelectorAll(".btn1"); // Selects all buttons with class .btn1
+let btns1 = document.querySelectorAll(".bttn1"); // Selects all buttons with class .btn1
 
 btns1.forEach(function (button) {
   button.onclick = function () {
@@ -63,7 +63,7 @@ btns1.forEach(function (button) {
     };
 });
 
-let btns2 = document.querySelectorAll(".btn2"); // Selects all buttons with class .btn2
+let btns2 = document.querySelectorAll(".bttn2"); // Selects all buttons with class .btn2
 
   btns2.forEach(function (button) {
   button.onclick = function () {
@@ -131,15 +131,46 @@ activites.forEach(function (activityBlock){
   if (completedTasks.includes(activityName)) {
 
     //Matches the button type to add the right color
-    if (taskButton.classList.contains("btn")) {
+    if (taskButton.classList.contains("bttn")) {
       taskButton.classList.add("selected1");
-    }else if (taskButton.classList.contains("btn1")) {
+    }else if (taskButton.classList.contains("bttn1")) {
       taskButton.classList.add("selected2");
-    }else if (taskButton.classList.contains("btn2")){
+    }else if (taskButton.classList.contains("bttn2")){
       taskButton.classList.add("selected3");
     }
 
     addPoint(); // Adds the point to the score display
   }
 })
+
+
+// FULL MODAL DISPLAY 
+// Grabs the full modal element from the HTML
+let fullModal = document.getElementById("fullModal");
+
+// Runs right before the full modal is shown on screen
+fullModal.addEventListener("show.bs.modal", function () {
+
+  // Finds the inner container inside the modal body to drop our content into
+  let modalContainer = fullModal.querySelector(".modal-body .container");
+  modalContainer.innerHTML = ""; // Clears any old content from a previous open
+
+  // Creates a fresh wrapper that reuses the same .containers layout as the main page
+  let wrapper = document.createElement("div");
+  wrapper.className = "containers";
+
+  // Loops through all three time-of-day containers (Morning, Afternoon, Evening)
+  [morningContainer, afternoonContainer, eveningContainer].forEach(function (container) {
+    let clone = container.cloneNode(true); // Makes a full copy including its activities and selected states
+    clone.style.display = "block"; // Forces it visible regardless of the current time of day
+    
+    clone.querySelectorAll("button").forEach(function (btn) {
+      btn.disabled = true; // Greys it out and blocks clicks
+      btn.style.pointerEvents = "none"; // Extra guard so taps do nothing
+    });
+    wrapper.appendChild(clone); // Adds the copy into the wrapper
+  });
+
+  modalContainer.appendChild(wrapper); // Places the full day's schedule inside the modal
+});
 });
