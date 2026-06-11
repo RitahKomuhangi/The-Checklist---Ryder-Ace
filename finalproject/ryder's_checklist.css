@@ -1,7 +1,30 @@
+/* Uniform Font Override */
+*, *::before, *::after,
+.btn, .card, .modal, .modal-title, .card-title, .card-text,
+h1, h2, h3, h4, h5, h6, p, button, input {
+    font-family: 'Times New Roman'
+}
+
+/* Font Size Reset */
+.main h1{
+    font-size: 1.6rem;
+}
+
+.container_head h2{
+    font-size: 1.5rem; 
+    font-weight: bold;
+}
+
+.activity h2{
+    font-size: 1.5rem; 
+    font-weight: bold;
+}
+
+
 /* Body Styling */
 body{
     justify-items: center;
-    background-image: url(imgs/Ry.png);
+    background-image: url(imgs/Ry1.jpg);
 }
 
 /* Main Container  Styling */
@@ -44,8 +67,8 @@ body{
 
 /* Morning Container */
 .container1{
-    width:400px;
-    max-width: 450px;
+    width:410px;
+    max-width: 460px;
     height: auto;
     border:  #F3D250;
     border-style: solid;
@@ -57,8 +80,8 @@ body{
 
 /* Afternoon Container */
 .container2{
-    width:400px;
-    max-width: 450px;
+    width:410px;
+    max-width: 460px;
     height: auto;
     border: #90CCF4;
     border-style: solid;
@@ -70,8 +93,8 @@ body{
 
 /* Evening Container */
 .container3{
-    width:400px;
-    max-width: 450px;
+    width:410px;
+    max-width: 460px;
     height: auto;
     border:#F78888;
     border-style: solid;
@@ -96,7 +119,7 @@ body{
     border-radius: 10px;
     display: flex;
     justify-content: space-around;
-    gap: 30px;
+    gap: 10px;
     background-color: #F1F1F2;
     color:#5DA2D5;
 }
@@ -157,24 +180,15 @@ button{
 .container1 button{
     border-color: #F3D250;
 }
-.container1 button:hover{
-    background-color:#F3D250 ;
-}
 
 /* Afternoon Buttons */
 .container2 button{
     border-color: #5DA2D5;;
 }
-.container2 button:hover{
-    background-color:#5DA2D5 ;
-}
 
 /* Evening Buttons */
 .container3 button{
     border-color: #F78888;;
-}
-.container3 button:hover{
-    background-color:#F78888;
 }
 
  /* TOGGLED SELECTIONS */
@@ -189,3 +203,4 @@ button{
 .selected3{
     background-color: #F78888;  /* Evening */
 }
+
